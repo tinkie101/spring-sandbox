@@ -1,0 +1,39 @@
+version: '3.7'
+
+volumes:
+  postgres_data:
+    name: "spring-sandbox-postgres-volume"
+    driver: local
+
+services:
+    postgres:
+      container_name: "spring-sandbox-postgres"
+      image: postgres:10
+      restart: always
+      environment:
+        - POSTGRES_USER=adventure_user
+        - POSTGRES_PASSWORD=adventure_password
+        - POSTGRES_DB=adventureit
+        - KEYCLOAK_INIT_DB=keycloak_db
+        - KEYCLOAK_INIT_USER=keycloak_user
+        - KEYCLOAK_INIT_PASS=keycloak_password
+      volumes:
+        - "postgres_data:/var/lib/postgresql/data"
+        - "./postgres/db_scripts:/docker-entrypoint-initdb.d"
+      ports:
+        - 5002:5432
+
+    keycloak:
+      container_name: "spring-sandbox-keycloak"
+      image: jboss/keycloak:10.0.1
+      depends_on:
+        - postgres
+      ports:
+        - "5000:8080"
+      environment:
+        - KEYCLOAK_USER=keycloak_admin_user
+        - KEYCLOAK_PASSWORD=keycloak_admin_password
+        - DB_DATABASE=keycloak_db
+        - DB_USER=keycloak_user
+        - DB_PASSWORD=keycloak_password
+        - DB_ADDR=postgres
