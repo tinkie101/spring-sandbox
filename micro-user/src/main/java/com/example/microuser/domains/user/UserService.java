@@ -8,17 +8,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return getUsers();
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User getUser(UUID userId) {
-        Optional<User> user = getUsers().stream().filter(u -> u.getId().equals(userId)).findFirst();
+    public List<UserDTO> getAllUsers() {
+        return getUsers().stream().map(user -> new UserDTO(user.getId(), user.getName(), user.getSurname())).collect(Collectors.toList());
+    }
+
+    public UserDTO getUser(UUID userId) {
+        Optional<UserDTO> user = getUsers().stream().map(u -> new UserDTO(u.getId(), u.getName(), u.getSurname())).filter(u -> u.getId().equals(userId)).findFirst();
 
         if (user.isEmpty()) {
             UserNotFoundException notFound = new UserNotFoundException("User not found!");
@@ -31,11 +37,7 @@ public class UserService {
     }
 
     private List<User> getUsers() {
-        return List.of(
-                new User(UUID.fromString("7dfd9786-c6b2-11eb-b8bc-0242ac130003"), "Albert", "Volschenk"),
-                new User(UUID.fromString("6d1e3ffa-c6b3-11eb-b8bc-0242ac130003"), "Latham", "van der Walt"),
-                new User(UUID.fromString("70ff6838-c6b3-11eb-b8bc-0242ac130003"), "Lisa", "Horn"),
-                new User(UUID.fromString("ae4c2172-c6b3-11eb-b8bc-0242ac130003"), "Arno", "Pouwels")
-        );
+        return (List<User>)userRepository.findAll();
+
     }
 }

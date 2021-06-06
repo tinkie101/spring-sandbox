@@ -1,17 +1,21 @@
 package com.example.microuser.domains.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class User {
-    private final UUID id;
-    private final String name;
-    private final String surname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-    public User(UUID id, String name, String surname) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-    }
+    private String name;
+    private String surname;
+
+    public User(){}
 
     public UUID getId() {
         return id;

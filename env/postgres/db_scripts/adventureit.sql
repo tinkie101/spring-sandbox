@@ -35,4 +35,21 @@ INSERT INTO adventure.adventure_user (id, adventure_id, user_id) VALUES ('e471f7
 INSERT INTO adventure.adventure_user (id, adventure_id, user_id) VALUES ('e471f83c-c6d9-11eb-b8bc-0242ac130003', '7dfd9a7e-c6b2-11eb-b8bc-0242ac130003', '70ff6838-c6b3-11eb-b8bc-0242ac130003');
 
 
+CREATE SCHEMA user;
 
+create table "user"
+(
+    id      uuid not null
+        constraint user_pkey
+            primary key,
+    name    varchar(255),
+    surname varchar(255)
+);
+
+alter table "user"
+    owner to adventure_user;
+
+INSERT INTO "user"."user" (id, name, surname) VALUES ('7dfd9786-c6b2-11eb-b8bc-0242ac130003', 'Albert', 'Volschenk');
+INSERT INTO "user"."user" (id, name, surname) VALUES ('6d1e3ffa-c6b3-11eb-b8bc-0242ac130003', 'Latham', 'van der Walt');
+INSERT INTO "user"."user" (id, name, surname) VALUES ('70ff6838-c6b3-11eb-b8bc-0242ac130003', 'Lisa', 'Horn');
+INSERT INTO "user"."user" (id, name, surname) VALUES ('ae4c2172-c6b3-11eb-b8bc-0242ac130003', 'Arno', 'Pouwels');
