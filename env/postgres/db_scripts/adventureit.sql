@@ -35,7 +35,7 @@ INSERT INTO adventure.adventure_user (id, adventure_id, user_id) VALUES ('e471f7
 INSERT INTO adventure.adventure_user (id, adventure_id, user_id) VALUES ('e471f83c-c6d9-11eb-b8bc-0242ac130003', '7dfd9a7e-c6b2-11eb-b8bc-0242ac130003', '70ff6838-c6b3-11eb-b8bc-0242ac130003');
 
 
-CREATE SCHEMA user;
+CREATE SCHEMA "user";
 
 create table "user"
 (
