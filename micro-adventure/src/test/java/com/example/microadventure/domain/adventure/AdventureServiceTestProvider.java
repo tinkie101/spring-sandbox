@@ -13,7 +13,7 @@ public class AdventureServiceTestProvider implements ArgumentsProvider {
     public static final UUID USER4_ID = UUID.fromString("7df60856-c7cd-11eb-b8bc-0242ac130003");
 
     @Override
-    public Stream<AdventureServiceTestArgumentType> provideArguments(ExtensionContext extensionContext) throws Exception {
+    public Stream<AdventureServiceTestArgumentType> provideArguments(ExtensionContext extensionContext) {
         return Stream.of(
                 AdventureServiceTestArgumentType.of(USER1_ID, 2),
                 AdventureServiceTestArgumentType.of(USER2_ID, 2),

@@ -13,6 +13,8 @@ class MicroAdventureApplicationTests {
     void contextLoads(ApplicationContext applicationContext) {
         Assertions.assertNotNull(applicationContext.getBean("userWebClient"));
         Assertions.assertNotNull(applicationContext.getBean("adventureWebClient"));
+        Assertions.assertNotNull(applicationContext.getBean("adventureService"));
+        Assertions.assertNotNull(applicationContext.getBean("adventureRepository"));
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.microadventure.domain.adventure;
 
+import com.example.microadventure.domains.adventure.AdventureDTO;
+import com.example.microadventure.domains.user.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +10,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.UUID;
 
+//e2e test || integration test
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AdventureControllerTest {
     @Autowired
@@ -15,12 +18,25 @@ public class AdventureControllerTest {
 
     @Test
     public void getAdventureUsers() {
-        StatusAssertions status = webClient.get().uri((uriBuilder) -> {
+        webClient.get().uri((uriBuilder) -> {
             uriBuilder.path("/adventure/{adventureId}/users");
             return uriBuilder.build(UUID.fromString("7dfd9998-c6b2-11eb-b8bc-0242ac130003"));
-        }).exchange().expectStatus();
-
-        status.isOk();
+        }).exchange()
+                .expectStatus()
+                .isOk()
+                .expectBodyList(UserDTO.class)
+                .hasSize(2);
     }
 
+    @Test
+    public void getAllAdventures() {
+        webClient.get().uri((uriBuilder) -> {
+            uriBuilder.path("/adventures");
+            return uriBuilder.build();
+        }).exchange()
+                .expectStatus()
+                .isOk()
+                .expectBodyList(AdventureDTO.class)
+                .hasSize(2);
+    }
 }

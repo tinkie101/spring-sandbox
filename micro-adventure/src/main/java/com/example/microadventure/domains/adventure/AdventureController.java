@@ -1,21 +1,40 @@
 package com.example.microadventure.domains.adventure;
 
-import com.example.microadventure.domains.user.UserDTO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequiredArgsConstructor
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+
+@Configuration
 public class AdventureController {
     private final AdventureService adventureService;
 
-    @GetMapping("/adventure/{adventureId}/users")
-    public List<UserDTO> getAdventureUsers(@PathVariable String adventureId) {
-        return adventureService.getAdventureUsers(UUID.fromString(adventureId));
+    AdventureController(AdventureService adventureService) {
+        this.adventureService = adventureService;
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> allAdventureRoutes() {
+        return route(GET("/adventure/{adventureId}/users"), this::getUsersByAdventureId)
+                .andRoute(GET("/adventures"), this::getAllAdventures);
+    }
+
+    @NonNull
+    private Mono<ServerResponse> getUsersByAdventureId(ServerRequest request) {
+        return ok().body(adventureService.getUsersByAdventureId(UUID.fromString(request.pathVariable("adventureId"))), Adventure.class);
+    }
+
+    @NonNull
+    private Mono<ServerResponse> getAllAdventures(ServerRequest request) {
+        return ok().body(adventureService.getAllAdventures(), Adventure.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.microadventure.domains.adventure;
+package com.example.microadventure.domains.adventureuser;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Adventure {
+public class AdventureUser {
     @Id
     private UUID id;
 
-    private String name;
-    private String description;
+    private UUID adventureId;
+    private UUID userId;
 }
