@@ -23,8 +23,8 @@ public class UserService {
         return getUsers().stream().map(user -> new UserDTO(user.getId(), user.getName(), user.getSurname())).collect(Collectors.toList());
     }
 
-    public UserDTO getUser(UUID userId) {
-        Optional<UserDTO> user = getUsers().stream().map(u -> new UserDTO(u.getId(), u.getName(), u.getSurname())).filter(u -> u.getId().equals(userId)).findFirst();
+    public UserDTO getUserById(UUID userId) {
+        Optional<UserDTO> user = userRepository.findById(userId).map(u -> new UserDTO(u.getId(), u.getName(), u.getSurname()));
 
         if (user.isEmpty()) {
             UserNotFoundException notFound = new UserNotFoundException("User not found!");
