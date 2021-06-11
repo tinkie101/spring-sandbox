@@ -1,5 +1,7 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.controllers;
 
+import com.example.microuser.dtos.UserDTO;
+import com.example.microuser.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

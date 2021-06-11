@@ -1,5 +1,6 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.repositories;
 
+import com.example.microuser.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,7 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.controllers;
 
 import com.example.microuser.MicroUserApplication;
+import com.example.microuser.dtos.UserDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,6 +1,10 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.services;
 
+import com.example.microuser.dtos.UserDTO;
+import com.example.microuser.entities.User;
 import com.example.microuser.exceptions.UserNotFoundException;
+import com.example.microuser.repositories.UserRepository;
+import com.example.microuser.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

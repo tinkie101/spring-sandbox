@@ -1,4 +1,4 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

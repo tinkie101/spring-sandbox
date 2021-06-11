@@ -1,6 +1,9 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.services;
 
+import com.example.microuser.entities.User;
+import com.example.microuser.dtos.UserDTO;
 import com.example.microuser.exceptions.UserNotFoundException;
+import com.example.microuser.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

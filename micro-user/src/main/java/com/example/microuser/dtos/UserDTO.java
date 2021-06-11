@@ -1,4 +1,4 @@
-package com.example.microuser.domains.user;
+package com.example.microuser.dtos;
 
 import java.util.Objects;
 import java.util.UUID;
