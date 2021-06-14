@@ -73,7 +73,7 @@ public class UserServiceTest {
         Assertions.assertThrows(UserNotFoundException.class, () -> userService.getUserById(id));
     }
 
-    // Parameterized test input values
+    // Parameterized test input value
     static private Stream<Arguments> getUserByIdArguments() {
         return Stream.of(
                 Arguments.of(user1, new UserDTO(user1.getId(), user1.getName(), user1.getSurname())),
