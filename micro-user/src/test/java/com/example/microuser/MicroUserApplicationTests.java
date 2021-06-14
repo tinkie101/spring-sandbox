@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
 class MicroUserApplicationTests {
+
     @Test
     void contextLoads(ApplicationContext applicationContext) {
         Assertions.assertNotNull(applicationContext.getBean("userService"));
