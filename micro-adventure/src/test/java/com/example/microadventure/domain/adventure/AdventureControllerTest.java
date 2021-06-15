@@ -3,17 +3,16 @@ package com.example.microadventure.domain.adventure;
 import com.example.microadventure.domains.adventure.AdventureDTO;
 import com.example.microadventure.domains.user.UserDTO;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.UUID;
 
 //e2e test || integration test
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Profile("e2e")
+@EnabledIfEnvironmentVariable(named = "SPRING_PROFILES_ACTIVE", matches = "(e2e)")
 public class AdventureControllerTest {
     @Autowired
     private WebTestClient webClient;

@@ -4,6 +4,7 @@ import com.example.microuser.MicroUserApplication;
 import com.example.microuser.dtos.UserDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
 //e2e test || integration test
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = MicroUserApplication.class)
-@Profile("e2e")
+@EnabledIfEnvironmentVariable(named = "SPRING_PROFILES_ACTIVE", matches = "(e2e)")
 public class UserControllerTest {
     @Autowired
     private WebTestClient webTestClient;
