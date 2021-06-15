@@ -11,7 +11,7 @@
 
     <artifactId>micro-adventure</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>micro-user</name>
+    <name>micro-adventure</name>
     <description>Example user microservice</description>
 
     <properties>

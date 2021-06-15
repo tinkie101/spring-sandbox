@@ -33,11 +33,20 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+
+      - name: Run micro-adventure
+        run: |
+          cd micro-adventure
+          chmod +x mvnw
+          mvnw spring-boot:start
+
+      - name: Run micro-user
+        run: |
+          cd micro-user
+          chmod +x mvnw
+          mvnw spring-boot:start
+
       - name: Build with Maven
         run: |
           chmod +x mvnw
-          chmod +x micro-adventure/mvnw
-          chmod +x micro-user/mvnw
-          micro-adventure/mvnw spring-boot:run
-          micro-user/mvnw spring-boot:run
           mvnw -B package --file pom.xml
