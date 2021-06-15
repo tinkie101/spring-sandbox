@@ -18,6 +18,8 @@ jobs:
         run: |
           sudo systemctl start postgresql.service
           pg_isready
+      - name: Create DB
+        run: sudo -u postgres createdb adventureit
       - name: Run SQL
         run: sudo -u postgres psql -d adventureit -a -f env/postgres/db_scripts/adventureit.sql
         env:
