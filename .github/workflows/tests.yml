@@ -35,8 +35,9 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: |
+          chmod +x mvnw
           chmod +x micro-adventure/mvnw
           chmod +x micro-user/mvnw
           micro-adventure/mvnw spring-boot:run
           micro-user/mvnw spring-boot:run
-          mvn -B package --file pom.xml
+          mvnw -B package --file pom.xml
