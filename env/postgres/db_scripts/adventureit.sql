@@ -1,4 +1,5 @@
 CREATE SCHEMA adventure;
+GRANT ALL ON SCHEMA adventure TO adventure_user;
 
 create table adventure.adventure
 (
@@ -35,6 +36,7 @@ INSERT INTO adventure.adventure_user (id, adventure_id, user_id) VALUES ('e471f8
 
 
 CREATE SCHEMA "user";
+GRANT ALL ON SCHEMA "user" TO adventure_user;
 
 create table "user"."user"
 (
