@@ -54,4 +54,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           chmod +x mvnw
-          ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.coverage.jacoco.xmlReportPaths=${project.build.directory}/site/jacoco/jacoco.xml
+          ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
