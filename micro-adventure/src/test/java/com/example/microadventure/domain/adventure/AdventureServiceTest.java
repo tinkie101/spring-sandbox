@@ -1,9 +1,10 @@
 package com.example.microadventure.domain.adventure;
 
-import com.example.microadventure.domains.adventure.*;
+import com.example.microadventure.domains.adventure.Adventure;
+import com.example.microadventure.domains.adventure.AdventureRepository;
+import com.example.microadventure.domains.adventure.AdventureService;
 import com.example.microadventure.domains.adventureuser.AdventureUser;
 import com.example.microadventure.domains.adventureuser.AdventureUserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +20,6 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
