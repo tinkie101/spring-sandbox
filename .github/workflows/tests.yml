@@ -36,11 +36,15 @@ jobs:
 
       - name: Run micro-adventure
         working-directory: micro-adventure
-        run: ./mvnw spring-boot:start
+        run: |
+          chmod +x mvnw
+         ./mvnw spring-boot:start
 
       - name: Run micro-user
         working-directory: micro-user
-        run: ./mvnw spring-boot:start
+        run: |
+          chmod +x mvnw
+          ./mvnw spring-boot:start
 
       - name: Build with Maven
         run: |
