@@ -35,14 +35,16 @@ jobs:
           distribution: 'adopt'
 
       - name: Run micro-adventure
+        working-directory: micro-adventure
         run: |
-          chmod +x ./micro-adventure/mvnw
-          ./micro-adventure/mvnw spring-boot:start
+          chmod +x mvnw
+          mvnw spring-boot:start
 
       - name: Run micro-user
+        working-directory: micro-user
         run: |
-          chmod +x ./micro-user/mvnw
-          ./micro-user/mvnw spring-boot:start
+          chmod +x mvnw
+          mvnw spring-boot:start
 
       - name: Build with Maven
         run: |
