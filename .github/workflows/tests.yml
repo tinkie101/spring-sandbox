@@ -19,7 +19,7 @@ jobs:
           sudo systemctl start postgresql.service
           pg_isready
       - name: Run SQL
-        run: sudo -u postgres psql -h 127.0.0.1 -d adventureit -a -f env/postgres/db_scripts/adventureit.sql
+        run: sudo -u postgres psql -d adventureit -a -f env/postgres/db_scripts/adventureit.sql
         env:
           PGPASSWORD: password
       - uses: actions/checkout@v2
