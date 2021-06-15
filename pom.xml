@@ -19,6 +19,7 @@
     <properties>
         <java.version>11</java.version>
         <sonar.projectKey>tinkie101_spring-sandbox</sonar.projectKey>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
         <sonar.organization>tinkie101</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
