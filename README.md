@@ -1,0 +1,3 @@
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tinkie101_spring-sandbox&metric=coverage)](https://sonarcloud.io/dashboard?id=tinkie101_spring-sandbox)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=tinkie101_spring-sandbox&metric=sqale_index)](https://sonarcloud.io/dashboard?id=tinkie101_spring-sandbox)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=tinkie101_spring-sandbox&metric=code_smells)](https://sonarcloud.io/dashboard?id=tinkie101_spring-sandbox)
