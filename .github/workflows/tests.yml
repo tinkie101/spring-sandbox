@@ -34,4 +34,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: |
+          micro-adventure/mvnw spring-boot:run
+          micro-user/mvnw spring-boot:run
+          mvn -B package --file pom.xml
