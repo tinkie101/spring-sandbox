@@ -4,9 +4,9 @@ import com.example.microuser.dtos.UserDTO;
 import com.example.microuser.entities.User;
 import com.example.microuser.exceptions.UserNotFoundException;
 import com.example.microuser.repositories.UserRepository;
-import com.example.microuser.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 //Unit test
+@EnabledIfEnvironmentVariable(named = "SPRING_PROFILES_ACTIVE", matches = "(e2e)")
 public class UserServiceTest {
     private final UserRepository userRepository = Mockito.mock(UserRepository.class);
     private final UserService userService = new UserService(userRepository);
