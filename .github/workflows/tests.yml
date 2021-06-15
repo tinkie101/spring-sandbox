@@ -16,12 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Start PostgreSQL on Ubuntu
-        run:
+        run: |
           sudo systemctl start postgresql.service
           pg_isready
 
       - name: Create DB
-        run:
+        run: |
           sudo -u postgres createdb adventureit
           sudo -u postgres psql --command="CREATE USER adventure_user PASSWORD 'adventure_password'" --command="\du"
 
