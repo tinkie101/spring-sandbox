@@ -15,4 +15,9 @@ public class SharedConfig {
     public WebClient adventureWebClient() {
         return WebClient.builder().baseUrl("http://localhost:9000").build();
     }
+
+    @Bean
+    public WebClient keycloakLoginClient() {
+        return WebClient.builder().baseUrl("http://localhost:5000/auth/realms/sandbox/protocol/openid-connect/token").build();
+    }
 }

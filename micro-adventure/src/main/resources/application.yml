@@ -1,0 +1,23 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    com.example.microadventure: DEBUG
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5002/adventureit
+    username: adventure_user
+    password: adventure_password
+    properties:
+      schema: adventure
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:5000/auth/realms/sandbox
