@@ -3,6 +3,7 @@ package com.example.microadventure.domains.adventure;
 import com.example.microadventure.domains.adventureuser.AdventureUser;
 import com.example.microadventure.domains.adventureuser.AdventureUserRepository;
 import com.example.microadventure.domains.user.UserDTO;
+import com.example.microadventure.exceptions.AdventureNotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,17 @@ public class AdventureService {
                 .map(AdventureUser::getUserId)
                 .distinct()
                 .flatMap(this::getUserFromService);
+    }
+
+    public Mono<AdventureDTO> putUpdateAdventure(UUID adventureId, Mono<AdventureDTO> adventure) {
+        logger.debug("put update adventure: {}", adventureId);
+
+        return adventureRepository.findById(adventureId)
+                .switchIfEmpty(Mono.error(new AdventureNotFound("Could not find adventure " + adventureId)))
+                .flatMap((o) -> adventure)
+                .map(adventureDTO -> new Adventure(adventureDTO.getId(), adventureDTO.getName(), adventureDTO.getDescription()))
+                .flatMap(adventureRepository::save)
+                .map(ra -> new AdventureDTO(ra.getId(), ra.getName(), ra.getDescription()));
     }
 
     public Flux<Adventure> getAllAdventures() {

@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
@@ -25,16 +25,22 @@ public class AdventureController {
     @Bean
     public RouterFunction<ServerResponse> allAdventureRoutes() {
         return route(GET("/adventure/{adventureId}/users"), this::getUsersByAdventureId)
-                .andRoute(GET("/adventures"), this::getAllAdventures);
+                .andRoute(GET("/adventures"), this::getAllAdventures)
+                .andRoute(PUT("/adventure/{adventureId}"), this::putUpdateAdventure);
     }
 
     @NonNull
     private Mono<ServerResponse> getUsersByAdventureId(ServerRequest request) {
-        return ok().body(adventureService.getUsersByAdventureId(UUID.fromString(request.pathVariable("adventureId"))), Adventure.class);
+        return ok().body(adventureService.getUsersByAdventureId(UUID.fromString(request.pathVariable("adventureId"))), AdventureDTO.class);
+    }
+
+    @NonNull
+    private Mono<ServerResponse> putUpdateAdventure(ServerRequest request) {
+        return ok().body(adventureService.putUpdateAdventure(UUID.fromString(request.pathVariable("adventureId")), request.bodyToMono(AdventureDTO.class)), AdventureDTO.class);
     }
 
     @NonNull
     private Mono<ServerResponse> getAllAdventures(ServerRequest request) {
-        return ok().body(adventureService.getAllAdventures(), Adventure.class);
+        return ok().body(adventureService.getAllAdventures(), AdventureDTO.class);
     }
 }
