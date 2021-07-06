@@ -3,7 +3,7 @@ GRANT ALL ON SCHEMA adventure TO adventure_user;
 
 create table adventure.adventure
 (
-    id   uuid not null
+    id   uuid not null DEFAULT uuid_generate_v4()
         constraint adventure_pkey
             primary key,
     description varchar(255),

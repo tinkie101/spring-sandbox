@@ -26,7 +26,9 @@ public class AdventureController {
     public RouterFunction<ServerResponse> allAdventureRoutes() {
         return route(GET("/adventure/{adventureId}/users"), this::getUsersByAdventureId)
                 .andRoute(GET("/adventures"), this::getAllAdventures)
-                .andRoute(PUT("/adventure/{adventureId}"), this::putUpdateAdventure);
+                .andRoute(POST("/adventure"), this::createAdventure)
+                .andRoute(PUT("/adventure/{adventureId}"), this::putUpdateAdventure)
+                .andRoute(DELETE("/adventure/{adventureId}"), this::deleteAdventure);
     }
 
     @NonNull
@@ -35,8 +37,18 @@ public class AdventureController {
     }
 
     @NonNull
+    private Mono<ServerResponse> createAdventure(ServerRequest request) {
+        return ok().body(adventureService.createAdventure(request.bodyToMono(AdventureDTO.class)), AdventureDTO.class);
+    }
+
+    @NonNull
     private Mono<ServerResponse> putUpdateAdventure(ServerRequest request) {
         return ok().body(adventureService.putUpdateAdventure(UUID.fromString(request.pathVariable("adventureId")), request.bodyToMono(AdventureDTO.class)), AdventureDTO.class);
+    }
+
+    @NonNull
+    private Mono<ServerResponse> deleteAdventure(ServerRequest request) {
+        return ok().body(adventureService.deleteAdventure(UUID.fromString(request.pathVariable("adventureId"))), Void.class);
     }
 
     @NonNull

@@ -53,15 +53,37 @@ public class AdventureService {
                 .flatMap(this::getUserFromService);
     }
 
+    public Mono<AdventureDTO> createAdventure(Mono<AdventureDTO> adventureDto) {
+        logger.debug("Add adventure");
+
+        return adventureDto
+                .map(dto -> {
+                    Adventure adventure = new Adventure();
+                    adventure.setDescription(dto.getDescription());
+                    adventure.setName(dto.getName());
+                    return adventure;
+                })
+                .flatMap(adventureRepository::save)
+                .map(ra -> new AdventureDTO(ra.getId(), ra.getName(), ra.getDescription()));
+    }
+
     public Mono<AdventureDTO> putUpdateAdventure(UUID adventureId, Mono<AdventureDTO> adventure) {
         logger.debug("put update adventure: {}", adventureId);
 
         return adventureRepository.findById(adventureId)
-                .switchIfEmpty(Mono.error(new AdventureNotFound("Could not find adventure " + adventureId)))
+                .switchIfEmpty(Mono.error(new AdventureNotFound("Could not update adventure " + adventureId)))
                 .flatMap((o) -> adventure)
                 .map(adventureDTO -> new Adventure(adventureDTO.getId(), adventureDTO.getName(), adventureDTO.getDescription()))
                 .flatMap(adventureRepository::save)
                 .map(ra -> new AdventureDTO(ra.getId(), ra.getName(), ra.getDescription()));
+    }
+
+    public Mono<Void> deleteAdventure(UUID adventureId) {
+        logger.debug("delete adventure: {}", adventureId);
+
+        return adventureRepository.findById(adventureId)
+                .switchIfEmpty(Mono.error(new AdventureNotFound("Could not delete adventure " + adventureId)))
+                .flatMap(adventureRepository::delete);
     }
 
     public Flux<Adventure> getAllAdventures() {
