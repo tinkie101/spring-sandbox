@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE SCHEMA adventure;
 GRANT ALL ON SCHEMA adventure TO adventure_user;
 
